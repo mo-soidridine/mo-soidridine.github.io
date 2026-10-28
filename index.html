@@ -1,784 +1,1203 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Mohamed Soidridine : géomatique, cartographie, analyse spatiale, télédétection et données territoriales.">
-  <title>Mohamed Soidridine | Portfolio géomatique</title>
-
-  <style>
-    :root {
-      --ink: #000000;
-      --text: #292929;
-      --muted: #666666;
-      --accent: #1749d8;
-      --accent-light: #eef2ff;
-      --background: #ffffff;
-      --surface: #f6f8f8;
-      --border: #e1e5e5;
-      --radius: 18px;
-      --max-width: 1120px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Eras Demi ITC", "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      background: var(--background);
-      line-height: 1.7;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    .container {
-      width: min(var(--max-width), calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* EN-TÊTE ET SIGNATURE */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(255, 255, 255, .96);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-    }
-
-    .navbar {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      min-width: 0;
-    }
-
-    .logo img {
-      display: block;
-      width: 94px;
-      height: 55px;
-      object-fit: contain;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-size: .94rem;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    /* ACCUEIL */
-
-    .hero {
-      padding: 100px 0 90px;
-      background: linear-gradient(
-        135deg,
-        #ffffff 55%,
-        #eef2ff 100%
-      );
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-size: .8rem;
-    }
-
-    h1,
-    h2,
-    h3 {
-      color: var(--ink);
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
-      letter-spacing: -.045em;
-      margin: 16px 0 20px;
-      max-width: 850px;
-    }
-
-    h2 {
-      font-size: clamp(1.9rem, 4vw, 2.7rem);
-      letter-spacing: -.025em;
-      margin: 0 0 18px;
-    }
-
-    h3 {
-      margin-top: 0;
-    }
-
-    .hero p {
-      max-width: 700px;
-      font-size: 1.15rem;
-      color: var(--text);
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 20px;
-      border-radius: 9px;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform .2s, background .2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      background: #1238a8;
-    }
-
-    .button.secondary {
-      color: var(--ink);
-      background: white;
-      border-color: var(--border);
-    }
-
-    section {
-      padding: 78px 0;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      max-width: 740px;
-      margin: 0 0 30px;
-    }
-
-    /* PROFIL */
-
-    .profile {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 36px;
-      align-items: start;
-    }
-
-    .profile-panel {
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    .profile-panel p:first-child {
-      margin-top: 0;
-    }
-
-    /* PROJETS */
-
-    .projects-section {
-      background: var(--surface);
-    }
-
-    .filters {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 28px 0;
-    }
-
-    .filter-button {
-      cursor: pointer;
-      font: inherit;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: white;
-      color: var(--text);
-      padding: 9px 16px;
-    }
-
-    .filter-button:hover,
-    .filter-button.active {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: white;
-      min-width: 0;
-    }
-
-    .project-card[hidden] {
-      display: none;
-    }
-
-    .project-type {
-      font-size: .8rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-    }
-
-    .project-card p {
-      flex: 1;
-    }
-
-    .project-link {
-      color: var(--ink);
-      font-weight: 700;
-      text-decoration-color: var(--accent);
-      text-underline-offset: 5px;
-    }
-
-    .project-link:hover {
-      color: var(--accent);
-    }
-
-    /* COMPÉTENCES */
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .skill-card {
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: white;
-    }
-
-    .skill-card h3 {
-      font-size: 1.12rem;
-    }
-
-    .skill-card p {
-      margin-bottom: 0;
-    }
-
-    .skill-card.featured {
-      border-top: 4px solid var(--accent);
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: var(--surface);
-    }
-
-    .contact-panel {
-      padding: 34px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: white;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .contact-links a {
-      color: var(--ink);
-      font-weight: 700;
-      text-underline-offset: 4px;
-    }
-
-    /* PIED DE PAGE */
-
-    footer {
-      padding: 24px 0;
-      color: var(--muted);
-      font-size: .9rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* AFFICHAGE SUR MOBILE */
-
-    @media (max-width: 760px) {
-      .navbar {
-        padding: 12px 0;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      nav {
-        gap: 12px 18px;
-        justify-content: flex-start;
-      }
-
-      .hero {
-        padding: 70px 0;
-      }
-
-      section {
-        padding: 58px 0;
-      }
-
-      .profile,
-      .project-grid,
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .logo img {
-        width: 78px;
-        height: 46px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mohamed Soidridine | Géomatique, cartographie et télédétection</title>
+
+    <meta name="description" content="Portfolio de Mohamed Soidridine, étudiant en Master 2 Géomatique et Modélisation Spatiale à Aix-Marseille Université. Projets de cartographie, télédétection et analyse spatiale.">
+
+    <style>
+        @font-face {
+            font-family: "Eras Demi ITC";
+            src: local("Eras Demi ITC");
+        }
+
+        :root {
+            --blue: #1769aa;
+            --blue-dark: #104d80;
+            --blue-light: #eaf4fc;
+            --text: #111111;
+            --text-light: #454545;
+            --background: #f5f7fa;
+            --white: #ffffff;
+            --border: #dce3eb;
+            --shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            font-family: "Eras Demi ITC", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+        /* Navigation */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 56px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        nav a {
+            font-size: 0.91rem;
+            font-weight: bold;
+            color: #111111;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        /* Accueil */
+
+        .hero {
+            padding: 100px 0 90px;
+            background: linear-gradient(135deg, #eaf4fc, #ffffff 65%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: #dceeff;
+            color: #104d80;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-bottom: 22px;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.2;
+            color: #000000;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin-bottom: 28px;
+            color: #333333;
+            font-size: 1.12rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: 1px solid var(--blue);
+            border-radius: 8px;
+            background: var(--blue);
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--blue-dark);
+            border-color: var(--blue-dark);
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background: #ffffff;
+            color: var(--blue-dark);
+        }
+
+        .button-secondary:hover {
+            color: #ffffff;
+        }
+
+        /* Sections */
+
+        section {
+            padding: 75px 0;
+        }
+
+        .section-heading {
+            max-width: 780px;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 12px;
+            color: #000000;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1.3;
+        }
+
+        .section-heading p {
+            color: var(--text-light);
+        }
+
+        /* Profil */
+
+        .profile-box {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .profile-text,
+        .profile-details {
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-text p + p {
+            margin-top: 15px;
+        }
+
+        .profile-details h3 {
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .profile-details ul {
+            padding-left: 20px;
+        }
+
+        .profile-details li {
+            margin-bottom: 10px;
+        }
+
+        /* Projets */
+
+        .projects-section {
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter-button {
+            padding: 9px 15px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background: #ffffff;
+            color: #111111;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #ffffff;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-top {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            background: var(--blue-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-top span {
+            color: var(--blue-dark);
+            font-size: 0.88rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .project-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 12px;
+            color: #000000;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+
+        .project-content p {
+            margin-bottom: 18px;
+            color: #333333;
+            font-size: 0.96rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .project-tags span {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #f0f2f5;
+            color: #222222;
+            font-size: 0.78rem;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .project-links .button {
+            padding: 10px 14px;
+            font-size: 0.88rem;
+        }
+
+        .project-links .button-secondary {
+            border-color: var(--border);
+        }
+
+        .project-links .button-secondary:hover {
+            border-color: var(--blue-dark);
+        }
+
+        .project-card[hidden] {
+            display: none;
+        }
+
+        /* Compétences */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 12px;
+            color: var(--blue-dark);
+        }
+
+        .skill-card p {
+            color: #333333;
+            font-size: 0.94rem;
+        }
+
+        /* Contact */
+
+        .contact-section {
+            background: var(--blue-light);
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .contact-intro p {
+            color: #333333;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-item {
+            padding: 16px 18px;
+            border: 1px solid #d5e5f3;
+            border-radius: 9px;
+            background: #ffffff;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #000000;
+        }
+
+        .contact-item a {
+            color: var(--blue-dark);
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pied de page */
+
+        footer {
+            padding: 25px 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            color: #333333;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--blue-dark);
+        }
+
+        /* Adaptation aux écrans */
+
+        @media (max-width: 850px) {
+            .navbar {
+                padding: 12px 0;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul {
+                justify-content: center;
+                gap: 12px 18px;
+            }
+
+            .hero {
+                padding: 70px 0;
+            }
+
+            .profile-box,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo img {
+                width: 85px;
+                height: 48px;
+            }
+
+            .logo-text {
+                font-size: 0.85rem;
+            }
+
+            nav ul {
+                gap: 8px 14px;
+            }
+
+            nav a {
+                font-size: 0.82rem;
+            }
+
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 55px 0;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .project-links .button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <div class="container navbar">
 
-      <a class="logo" href="#accueil" aria-label="Accueil du portfolio">
-        <img
-          src="signature.png"
-          alt="Signature manuscrite de Mohamed Soidridine"
-        >
-      </a>
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
 
-      <nav aria-label="Navigation principale">
-        <a href="#profil">Mon profil</a>
-        <a href="#projets">Projets</a>
-        <a href="#competences">Compétences</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ACCUEIL -->
-
-    <section class="hero" id="accueil">
-      <div class="container">
-
-        <span class="eyebrow">Portfolio · Géomatique</span>
-
-        <h1>Mohamed Soidridine</h1>
-
-        <p>
-          Géomatique, cartographie et analyse spatiale.
-          Découvrez mes projets de cartographie, de traitement
-          de données géographiques et d'analyse territoriale.
-        </p>
-
-        <div class="actions">
-          <a class="button" href="#projets">
-            Explorer mes projets
-          </a>
-
-          <a class="button secondary" href="#contact">
-            Me contacter
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROFIL -->
-
-    <section id="profil">
-      <div class="container">
-
-        <div class="profile">
-
-          <div>
-            <span class="eyebrow">Présentation</span>
-            <h2>Mon profil</h2>
-          </div>
-
-          <div class="profile-panel">
-
-            <p>
-              Je suis étudiant en Master 2 Géographie, Aménagement,
-              Environnement et Développement (GAED), parcours
-              Géomatique et Modélisation Spatiale (GMS), à
-              Aix-Marseille Université, pour l'année universitaire
-              2026–2027.
-            </p>
-
-            <p>
-              Mon parcours porte sur les systèmes d'information
-              géographique, l'analyse spatiale, la télédétection et
-              l'exploitation de données territoriales.
-            </p>
-
-            <p>
-              Je développe mes compétences en traitement de données,
-              programmation et modélisation afin de répondre à des
-              problématiques géographiques et d'aménagement.
-            </p>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJETS -->
-
-    <section class="projects-section" id="projets">
-      <div class="container">
-
-        <span class="eyebrow">Réalisations</span>
-        <h2>Mes projets</h2>
-
-        <p class="section-intro">
-          Quelques travaux mobilisant la cartographie, l'analyse
-          spatiale et les données géographiques.
-        </p>
-
-        <div class="filters" role="group" aria-label="Filtrer les projets">
-
-          <button
-            class="filter-button active"
-            data-filter="all"
-            aria-pressed="true"
-          >
-            Tous les projets
-          </button>
-
-          <button
-            class="filter-button"
-            data-filter="cartographie"
-            aria-pressed="false"
-          >
-            Cartographie
-          </button>
-
-          <button
-            class="filter-button"
-            data-filter="analyse"
-            aria-pressed="false"
-          >
-            Analyse spatiale
-          </button>
-
-          <button
-            class="filter-button"
-            data-filter="mobilite"
-            aria-pressed="false"
-          >
-            Mobilité
-          </button>
-
-          <button
-            class="filter-button"
-            data-filter="teledetection"
-            aria-pressed="false"
-          >
-            Télédétection
-          </button>
-
-          <button
-            class="filter-button"
-            data-filter="autres"
-            aria-pressed="false"
-          >
-            Autres travaux
-          </button>
-
-        </div>
-
-        <div class="project-grid">
-
-          <article
-            class="project-card"
-            data-category="cartographie analyse"
-          >
-
-            <span class="project-type">
-              Cartographie · Analyse spatiale
-            </span>
-
-            <h3>
-              Logement social et ségrégation résidentielle à Brest Métropole
-            </h3>
-
-            <p>
-              Exploration cartographique de la distribution du parc
-              de logements sociaux et des structures résidentielles
-              à l'échelle infracommunale.
-            </p>
-
-            <a
-              class="project-link"
-              href="https://mo-soidridine.github.io/brest_metropole/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Consulter la carte
+            <a class="logo" href="#accueil" aria-label="Retour à l'accueil">
+                <img src="signature.png"
+                     alt="Signature bleue de Mohamed Soidridine">
+                <span class="logo-text">Portfolio</span>
             </a>
 
-          </article>
-
-          <article
-            class="project-card"
-            data-category="cartographie analyse mobilite"
-          >
-
-            <span class="project-type">
-              Cartographie · Mobilité
-            </span>
-
-            <h3>
-              Accessibilité aux transports à Aix-en-Provence
-            </h3>
-
-            <p>
-              Carte interactive consacrée à l'accessibilité aux
-              transports, avec une présentation des résultats et
-              de la méthodologie directement dans le projet.
-            </p>
-
-            <a
-              class="project-link"
-              href="https://mo-soidridine.github.io/Aix-en-Provence/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Consulter la carte
-            </a>
-
-          </article>
-
-          <!-- Ajoute ici tes autres projets lorsque tu seras prêt. -->
+            <nav aria-label="Navigation principale">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#profil">Profil</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
 
         </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- COMPÉTENCES -->
+    <main>
 
-    <section id="competences">
-      <div class="container">
+        <!-- Accueil -->
+        <section class="hero" id="accueil">
+            <div class="container hero-content">
 
-        <span class="eyebrow">Savoir-faire</span>
-        <h2>Compétences techniques</h2>
+                <span class="eyebrow">
+                    Master 2 GAED — Géomatique et Modélisation Spatiale
+                </span>
 
-        <p class="section-intro">
-          Des compétences en SIG, bases de données, télédétection
-          et analyse spatiale, développées au cours de ma formation
-          et de mes projets.
-        </p>
+                <h1>
+                    Géomatique, cartographie, analyse spatiale et télédétection
+                </h1>
 
-        <div class="skills-grid">
+                <p>
+                    Bienvenue sur mon portfolio. Vous trouverez ici une sélection
+                    de mes travaux universitaires et personnels portant sur
+                    l'analyse spatiale, les systèmes d'information géographique,
+                    la cartographie interactive et la télédétection.
+                </p>
 
-          <article class="skill-card featured">
-            <h3>Systèmes d'Information Géographique (SIG)</h3>
+                <div class="hero-buttons">
+                    <a class="button" href="#projets">
+                        Explorer mes projets
+                    </a>
 
+                    <a class="button button-secondary"
+                       href="https://www.linkedin.com/in/mohamed-soidridine-49542b1b7/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Mon LinkedIn
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Profil -->
+        <section id="profil">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h2>Mon profil</h2>
+                    <p>
+                        Formation, démarche et domaines de compétences.
+                    </p>
+                </div>
+
+                <div class="profile-box">
+
+                    <div class="profile-text">
+                        <p>
+                            Actuellement étudiant en Master 2 Géographie,
+                            Aménagement, Environnement et Développement (GAED),
+                            parcours Géomatique et Modélisation Spatiale (GMS),
+                            à Aix-Marseille Université pour l'année universitaire
+                            2026–2027, je m'intéresse à l'utilisation des outils
+                            géomatiques pour comprendre les dynamiques
+                            territoriales et environnementales.
+                        </p>
+
+                        <p>
+                            Mes travaux mobilisent notamment les systèmes
+                            d'information géographique, la télédétection,
+                            les données spatiales et la cartographie afin
+                            d'étudier des phénomènes urbains, environnementaux
+                            et territoriaux.
+                        </p>
+
+                        <p>
+                            Ce portfolio présente une sélection de projets
+                            réalisés au cours de mon parcours. Il sera enrichi
+                            progressivement au fil de mes nouvelles réalisations.
+                        </p>
+                    </div>
+
+                    <aside class="profile-details">
+                        <h3>Formation</h3>
+                        <ul>
+                            <li>
+                                <strong>Diplôme :</strong> Master 2 GAED
+                            </li>
+                            <li>
+                                <strong>Parcours :</strong>
+                                Géomatique et Modélisation Spatiale (GMS)
+                            </li>
+                            <li>
+                                <strong>Université :</strong>
+                                Aix-Marseille Université
+                            </li>
+                            <li>
+                                <strong>Année :</strong> 2026–2027
+                            </li>
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projets -->
+        <section class="projects-section" id="projets">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h2>Mes projets</h2>
+                    <p>
+                        Découvrez mes travaux de cartographie, de télédétection
+                        et d'analyse spatiale. Les boutons permettent d'ouvrir
+                        les cartes interactives, les rapports et les dépôts
+                        de projets disponibles.
+                    </p>
+                </div>
+
+                <!-- Filtres -->
+                <div class="filters" aria-label="Filtrer les projets">
+                    <button class="filter-button active"
+                            type="button"
+                            data-filter="all"
+                            aria-pressed="true">
+                        Tous les projets
+                    </button>
+
+                    <button class="filter-button"
+                            type="button"
+                            data-filter="cartographie"
+                            aria-pressed="false">
+                        Cartographie
+                    </button>
+
+                    <button class="filter-button"
+                            type="button"
+                            data-filter="teledetection"
+                            aria-pressed="false">
+                        Télédétection
+                    </button>
+
+                    <button class="filter-button"
+                            type="button"
+                            data-filter="environnement"
+                            aria-pressed="false">
+                        Environnement
+                    </button>
+
+                    <button class="filter-button"
+                            type="button"
+                            data-filter="urbain"
+                            aria-pressed="false">
+                        Analyse urbaine
+                    </button>
+                </div>
+
+                <div class="projects-grid">
+
+                    <!-- Projet 1 : Brest -->
+                    <article class="project-card"
+                             data-category="cartographie urbain">
+
+                        <div class="project-top">
+                            <span>Cartographie · Analyse spatiale</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Brest Métropole — Logement social et ségrégation résidentielle
+                            </h3>
+
+                            <p>
+                                Étude de la répartition spatiale du parc de
+                                logements sociaux et des dynamiques de
+                                ségrégation résidentielle à Brest Métropole,
+                                à partir de données territoriales et
+                                d'indicateurs d'analyse spatiale.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>QGIS</span>
+                                <span>Analyse spatiale</span>
+                                <span>Logement social</span>
+                                <span>Cartographie web</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://mo-soidridine.github.io/brest_metropole/"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter la carte
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/brest_metropole/blob/main/rapport-segregation-logement-social-brest.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 2 : Aix-en-Provence -->
+                    <article class="project-card"
+                             data-category="cartographie urbain">
+
+                        <div class="project-top">
+                            <span>Cartographie interactive · Mobilité</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Aix-en-Provence — Accessibilité et transports
+                            </h3>
+
+                            <p>
+                                Réalisation d'une carte interactive consacrée
+                                à l'accessibilité et à la représentation
+                                d'informations territoriales liées aux
+                                transports. La méthodologie est présentée
+                                directement dans la carte.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>QGIS</span>
+                                <span>Cartographie web</span>
+                                <span>Accessibilité</span>
+                                <span>Mobilité</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://mo-soidridine.github.io/Aix-en-Provence/"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter la carte
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 3 : Incendies -->
+                    <article class="project-card"
+                             data-category="teledetection environnement">
+
+                        <div class="project-top">
+                            <span>Télédétection · Risques naturels</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Incendies de Béjaïa et Jijel — Août 2026
+                            </h3>
+
+                            <p>
+                                Analyse satellitaire de l'évolution de la
+                                végétation et de l'emprise estimée des zones
+                                brûlées, avec comparaison d'indices spectraux
+                                et croisement avec les détections de feux et
+                                les données d'occupation du sol.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Sentinel-2</span>
+                                <span>NDVI</span>
+                                <span>dNBR</span>
+                                <span>NASA FIRMS</span>
+                                <span>QGIS</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://github.com/mo-soidridine/incendies-bejaia-jijel-2026/blob/main/rapport/rapport-incendies-bejaia-jijel-aout-2026.pdf.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/incendies-bejaia-jijel-2026"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Voir le projet
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 4 : Klaipėda -->
+                    <article class="project-card"
+                             data-category="teledetection environnement">
+
+                        <div class="project-top">
+                            <span>Télédétection · Comparaison satellitaire</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Klaipėda — Comparaison satellitaire et indices spectraux
+                            </h3>
+
+                            <p>
+                                Étude comparative mobilisant des images
+                                satellitaires, des indices spectraux et
+                                différentes approches de classification
+                                afin d'analyser les caractéristiques
+                                de l'occupation du sol.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Télédétection</span>
+                                <span>NDVI</span>
+                                <span>NDWI</span>
+                                <span>NDBI</span>
+                                <span>TerrSet</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://github.com/mo-soidridine/comparaison-satellites-klaipeda/blob/main/rapport-comparaison-satellites-klaipeda.pdf.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/comparaison-satellites-klaipeda"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Voir le projet
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 5 : Pollution sonore -->
+                    <article class="project-card"
+                             data-category="cartographie urbain environnement">
+
+                        <div class="project-top">
+                            <span>Analyse spatiale · Environnement urbain</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Pollution sonore — Marignane, Vitrolles et Saint-Victoret
+                            </h3>
+
+                            <p>
+                                Analyse territoriale de l'exposition au bruit
+                                routier, ferroviaire et aérien, avec croisement
+                                de données de population, de bâti et de
+                                proximité des sources sonores.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>QGIS</span>
+                                <span>Indicateur Lden</span>
+                                <span>INSEE</span>
+                                <span>Analyse multicritère</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://github.com/mo-soidridine/pollution-sonore-marignane-vitrolles/blob/main/rapport-pollution-sonore-marignane-vitrolles.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/pollution-sonore-marignane-vitrolles"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Voir le projet
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 6 : Aubagne -->
+                    <article class="project-card"
+                             data-category="teledetection environnement urbain">
+
+                        <div class="project-top">
+                            <span>Occupation du sol · Risques</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Aubagne — Occupation du sol et risques
+                            </h3>
+
+                            <p>
+                                Projet consacré à l'étude de l'occupation du
+                                sol et à son croisement avec des informations
+                                relatives aux risques, afin de produire une
+                                lecture spatiale des enjeux du territoire.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>QGIS</span>
+                                <span>Occupation du sol</span>
+                                <span>Analyse spatiale</span>
+                                <span>Risques</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://github.com/mo-soidridine/occupation-sol-risques-aubagne/blob/main/rapport-occupation-sol-risques-aubagne.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/occupation-sol-risques-aubagne"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Voir le projet
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projet 7 : Marseille 13e -->
+                    <article class="project-card"
+                             data-category="cartographie urbain">
+
+                        <div class="project-top">
+                            <span>Géomatique · Données du bâti</span>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>
+                                Marseille 13e — Enrichissement des données du bâti
+                            </h3>
+
+                            <p>
+                                Travail de traitement et d'enrichissement
+                                de données géographiques sur le bâti,
+                                dans le but de produire une base de données
+                                spatiale plus exploitable pour l'analyse
+                                territoriale.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>QGIS</span>
+                                <span>Données spatiales</span>
+                                <span>Bâtiments</span>
+                                <span>Traitement de données</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a class="button"
+                                   href="https://github.com/mo-soidridine/enrichissement-bati-marseille-13/blob/main/rapport-enrichissement-bati-marseille-13.pdf"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Consulter le rapport PDF
+                                </a>
+
+                                <a class="button button-secondary"
+                                   href="https://github.com/mo-soidridine/enrichissement-bati-marseille-13"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Voir le projet
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences -->
+        <section id="competences">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h2>Compétences et outils</h2>
+                    <p>
+                        Quelques outils et domaines mobilisés dans mes travaux
+                        de géomatique et d'analyse territoriale.
+                    </p>
+                </div>
+
+                <div class="skills-grid">
+
+                    <article class="skill-card">
+                        <h3>Systèmes d'information géographique</h3>
+                        <p>
+                            QGIS, ArcGIS Pro, gestion de couches,
+                            traitements géographiques, analyses spatiales
+                            et réalisation de cartes thématiques.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Télédétection</h3>
+                        <p>
+                            Analyse d'images satellitaires, indices spectraux,
+                            classification d'images et étude des changements
+                            de l'occupation du sol.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Cartographie web</h3>
+                        <p>
+                            Création de cartes interactives, publication
+                            de projets cartographiques et intégration
+                            de cartes dans un portfolio web.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Bases de données spatiales</h3>
+                        <p>
+                            Découverte et utilisation de PostgreSQL,
+                            PostGIS, pgAdmin et DuckDB pour la gestion
+                            et le traitement de données.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Programmation et automatisation</h3>
+                        <p>
+                            Initiation à Python et exploration d'outils
+                            permettant d'automatiser des traitements
+                            et d'analyser des données géographiques.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Analyse territoriale</h3>
+                        <p>
+                            Croisement de données socio-économiques,
+                            environnementales et géographiques pour
+                            étudier les dynamiques territoriales.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact-section" id="contact">
+            <div class="container contact-box">
+
+                <div class="contact-intro">
+                    <div class="section-heading">
+                        <h2>Me contacter</h2>
+                    </div>
+
+                    <p>
+                        Vous souhaitez échanger au sujet de mes projets,
+                        de la géomatique, de la cartographie ou d'une
+                        éventuelle opportunité de stage ou d'alternance ?
+                        Vous pouvez me contacter par les moyens ci-dessous.
+                    </p>
+                </div>
+
+                <div class="contact-list">
+
+                    <div class="contact-item">
+                        <strong>Adresse e-mail</strong>
+                        <a href="mailto:soidrdinemohamed@gmail.com">
+                            soidrdinemohamed@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="contact-item">
+                        <strong>LinkedIn</strong>
+                        <a href="https://www.linkedin.com/in/mohamed-soidridine-49542b1b7/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Consulter mon profil LinkedIn
+                        </a>
+                    </div>
+
+                    <div class="contact-item">
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/mo-soidridine"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Consulter mes dépôts GitHub
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
             <p>
-              Maîtrise de QGIS, mon principal logiciel SIG, et
-              utilisation d'ArcGIS Pro.
+                © <span id="year"></span> Mohamed Soidridine —
+                Géomatique, cartographie, analyse spatiale et télédétection.
             </p>
-          </article>
-
-          <article class="skill-card">
-            <h3>Bases de données et ETL</h3>
-
-            <p>
-              Gestion et administration sous PostgreSQL/PostGIS,
-              requêtes SQL et traitement de données avec FME.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <h3>Programmation</h3>
-
-            <p>
-              Python : notions, apprentissage et évolution en cours.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <h3>Télédétection et Deep Learning</h3>
-
-            <p>
-              Utilisation de TerrSet (LiberaGIS) et SNAP, traitement
-              d'imagerie satellite (Sentinel, Landsat, Pléiades),
-              manipulation de données LiDAR (HD IGN) et segmentation
-              par Deep Learning (architectures U-Net / ResNet50).
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <h3>Analyse spatiale et statistique</h3>
-
-            <p>
-              Modélisation, analyses de réseaux, calculs d'indices
-              spectraux et de ségrégation, appariement spatial,
-              régressions et utilisation avancée d'Excel.
-            </p>
-          </article>
-
-          <article class="skill-card">
-            <h3>Exploitation de données ouvertes</h3>
-
-            <p>
-              Utilisation de données de l'IGN (BD TOPO), de l'INSEE,
-              d'OpenStreetMap et de data.gouv.fr.
-            </p>
-          </article>
-
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- CONTACT -->
+    <script>
+        // Mise à jour automatique de l'année
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
 
-    <section class="contact" id="contact">
-      <div class="container">
+        // Filtres des projets
+        const filterButtons = document.querySelectorAll(".filter-button");
+        const projectCards = document.querySelectorAll(".project-card");
 
-        <div class="contact-panel">
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const filter = button.dataset.filter;
 
-          <span class="eyebrow">Échangeons</span>
-          <h2>Contact</h2>
+                filterButtons.forEach((item) => {
+                    item.classList.remove("active");
+                    item.setAttribute("aria-pressed", "false");
+                });
 
-          <p>
-            Pour discuter d'un projet, d'une collaboration ou d'une
-            opportunité en géomatique, cartographie et analyse spatiale.
-          </p>
+                button.classList.add("active");
+                button.setAttribute("aria-pressed", "true");
 
-          <div class="contact-links">
+                projectCards.forEach((card) => {
+                    const categories = card.dataset.category.split(" ");
 
-            <a href="mailto:soidrdinemohamed@gmail.com">
-              M'envoyer un e-mail
-            </a>
+                    const visible =
+                        filter === "all" || categories.includes(filter);
 
-            <a
-              href="https://www.linkedin.com/in/mohamed-soidridine-49542b1b7/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-
-            <a
-              href="https://github.com/mo-soidridine"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- PIED DE PAGE -->
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Mohamed Soidridine · Portfolio géomatique
-    </div>
-  </footer>
-
-  <!-- FILTRES DES PROJETS ET ANNÉE AUTOMATIQUE -->
-
-  <script>
-    const filterButtons = document.querySelectorAll(".filter-button");
-    const projectCards = document.querySelectorAll(".project-card");
-
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-
-        filterButtons.forEach(item => {
-          const active = item === button;
-
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
+                    card.hidden = !visible;
+                });
+            });
         });
-
-        projectCards.forEach(card => {
-          const categories = card.dataset.category.split(" ");
-
-          card.hidden =
-            filter !== "all" && !categories.includes(filter);
-        });
-      });
-    });
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+    </script>
 
 </body>
 </html>
+```
